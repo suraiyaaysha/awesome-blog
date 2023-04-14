@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Frontend\FrontendBlogController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Frontend\FrontendContactController;
+use App\Http\Controllers\CmsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,16 +28,19 @@ use App\Http\Controllers\Frontend\FrontendBlogController;
 //     return view('frontend.home');
 // });
 
+// Frontend Routes
 Route::get('/', [FrontendBlogController::class, 'index'])->name('frontend.home');
 Route::get('frontend/blog/{id}/blog-details', [FrontendBlogController::class, 'show'])->name('frontend.blog.blog-details');
 
-Route::get('/about', function () {
-    return view('frontend.about');
+
+Route::controller(FrontendBlogController::class)->group(function(){
+    Route::get('/', 'home')->name('frontend.home');
+    Route::get('/about', 'about')->name('frontend.about');
+    Route::get('/contact', 'contact')->name('frontend.contact');
 });
 
-Route::get('/contact', function () {
-    return view('frontend.contact');
-});
+
+Route::post('/contact/store', [ContactController::class, 'contactFormStore'])->name('frontend.contact');
 
 
 // Admin Panel Route List Start
@@ -55,18 +61,21 @@ Route::delete('admin/blog/{id}/delete', [BlogController::class, 'destroy'])->nam
 Route::get('admin/blog/{id}/show', [BlogController::class, 'show'])->name('admin.blog.show');
 
 // Page Settings Route List Start
-Route::get('/admin/home', function () {
-    return view('admin.home');
+Route::controller(CmsController::class)->group(function(){
+    Route::get('/admin/home', 'home')->name('admin.home');
+    Route::put('/admin/home', 'homeUpdate')->name('admin.home');
+    Route::get('/admin/about', 'about')->name('admin.about');
+    Route::put('/admin/about', 'aboutUpdate')->name('admin.about');
+    Route::get('/admin/contact', 'contact')->name('admin.contact');
+    Route::put('/admin/contact', 'contactUpdate')->name('admin.contact');
 });
 
-Route::get('/admin/about', function () {
-    return view('admin.about');
-});
+// Route::post('admin/contact/list', [ContactController::class, 'index'])->name('admin.contact.index');
+Route::post('admin/contact/store', [ContactController::class, 'contactFormStore'])->name('frontend.contact.store');
 
-Route::get('/admin/contact', function () {
-    return view('admin.contact');
-});
+// Route::post('/admin/contact/store', [ContactController::class, 'store'])->name('admin.contact.store');
+// Route::get('admin/contact/{id}/show', [ContactController::class, 'show'])->name('admin.contact.show');
 
-Route::get('/admin/general-settings', function () {
+Route::get('admin/general-settings', function () {
     return view('admin.general-settings');
 });
