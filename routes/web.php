@@ -40,7 +40,7 @@ Route::controller(FrontendBlogController::class)->group(function(){
 });
 
 
-Route::post('/contact/store', [ContactController::class, 'contactFormStore'])->name('frontend.contact');
+Route::post('/contact', [ContactController::class, 'contactFormStore'])->name('frontend.contact.contactFormStore');
 
 
 // Admin Panel Route List Start
@@ -70,11 +70,7 @@ Route::controller(CmsController::class)->group(function(){
     Route::put('/admin/contact', 'contactUpdate')->name('admin.contact');
 });
 
-// Route::post('admin/contact/list', [ContactController::class, 'index'])->name('admin.contact.index');
-Route::post('admin/contact/store', [ContactController::class, 'contactFormStore'])->name('frontend.contact.store');
-
-// Route::post('/admin/contact/store', [ContactController::class, 'store'])->name('admin.contact.store');
-// Route::get('admin/contact/{id}/show', [ContactController::class, 'show'])->name('admin.contact.show');
+// Route::get('/admin/contact/list', [ContactController::class, 'contactList'])->name('admin.contact.contactList');
 
 Route::get('admin/general-settings', function () {
     return view('admin.general-settings');

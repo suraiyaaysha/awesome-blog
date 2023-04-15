@@ -24,23 +24,52 @@
 
                     <div class="my-5">
 
-                        <form id="contactForm" method="POST" action="{{ '/admin/contact/list' }}" enctype="multipart/form-data">
+                        @if ($message = Session::get('success'))
+
+                            <div class="grid-margin">
+                                <div class="alert alert-success badge-outline-success">
+                                    {{  $message  }}
+                                </div>
+                            </div>
+                        @endif
+
+                        <form method="POST" action="{{ '/contact' }}">
                             @csrf
                             <div class="form-floating">
-                                <input class="form-control" type="text" name="user_name" placeholder="Enter your name..." />
+                                <input class="form-control" type="text" name="user_name" value="{{ old('user_name') }}" placeholder="Enter your name..." />
                                 <label for="name">Name</label>
+
+                                @if ($errors->has('user_name'))
+                                    <span class="text-danger">{{ $errors->first('user_name') }}</span>
+                                @endif
+
                             </div>
                             <div class="form-floating">
-                                <input class="form-control" type="email" name="user_email" placeholder="Enter your email..." />
+                                <input class="form-control" type="email" name="user_email" value="{{ old('user_email') }}" placeholder="Enter your email..." />
                                 <label for="email">Email address</label>
+
+                                @if ($errors->has('user_email'))
+                                    <span class="text-danger">{{ $errors->first('user_email') }}</span>
+                                @endif
+
                             </div>
                             <div class="form-floating">
-                                <input class="form-control" type="text" name="user_phone" placeholder="Enter your phone number..." />
+                                <input class="form-control" type="text" name="user_phone" value="{{ old('user_phone') }}" placeholder="Enter your phone number..." />
                                 <label for="phone">Phone Number</label>
+
+                                @if ($errors->has('user_phone'))
+                                    <span class="text-danger">{{ $errors->first('user_phone') }}</span>
+                                @endif
+
                             </div>
                             <div class="form-floating">
-                                <textarea class="form-control" name="user_message" placeholder="Enter your message here..." style="height: 12rem"></textarea>
+                                <textarea class="form-control" name="user_message" placeholder="Enter your message here..." style="height: 12rem">{{ old('user_message') }}</textarea>
                                 <label for="message">Message</label>
+
+                                @if ($errors->has('user_message'))
+                                    <span class="text-danger">{{ $errors->first('user_message') }}</span>
+                                @endif
+
                             </div>
                             <br />
                             <!-- Submit success message-->

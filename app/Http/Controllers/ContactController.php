@@ -5,16 +5,23 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Contact;
+use Mail;
+use App\Mail\SendMail;
 
 class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function contactList()
     {
-        $data = Contact::all();
-        return view('admin.contact', compact('data'));
+        // $data = Contact::all();
+        $data = Contact::latest()->paginate(5);
+
+        return view('admin.contact', compact('data'))->with(
+            'i', (request()->input('page', 1) - 1) *5
+        );
+
     }
 
     /**
@@ -44,8 +51,15 @@ class ContactController extends Controller
         $data->user_phone = $request->user_phone;
         $data->user_message = $request->user_message;
 
+
+        //  Send mail to admin
+
+        Mail::to($data->user_email)->send(new SendMail($data));
+        // Mail::to('suraiyaaysha.cse@gmail.com')->send(new SendMail($data));
+
         $data->save();
 
+        // dd($data);
         return back()->withSuccess('Form Submitted Successfully');
     }
 

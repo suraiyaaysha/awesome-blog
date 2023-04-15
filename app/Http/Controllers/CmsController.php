@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cms;
+use App\Models\Contact;
 
 class CmsController extends Controller
 {
@@ -19,14 +20,21 @@ class CmsController extends Controller
 
     public function contact(){
         $cms = Cms::first();
-        return view('admin.contact', compact('cms'));
+
+        // $data = Contact::all();
+        $data = Contact::latest()->paginate(5);
+
+        // return view('admin.contact', compact('cms', 'data'));
+        return view('admin.contact', compact('cms', 'data'))->with(
+            'i', (request()->input('page', 1) - 1) *5
+        );
     }
 
     public function homeUpdate(Request $request){
         // Validate data
         $request->validate([
-            'home_heading'=> 'required',
-            'home_sub_heading'=> 'required',
+            'home_heading'=> 'required|max:255',
+            'home_sub_heading'=> 'required|max:510',
             'home_banner_img'=> 'nullable|mimes:jpeg,jpg,png|max:15000',
         ]);
 
@@ -56,8 +64,8 @@ class CmsController extends Controller
 
         // Validate data
         $request->validate([
-            'about_heading'=> 'required',
-            'about_sub_heading'=> 'required',
+            'about_heading'=> 'required|max:255',
+            'about_sub_heading'=> 'required|max:510',
             'about_banner_img'=> 'nullable|mimes:jpeg,jpg,png|max:15000',
             'about_content'=> 'required',
         ]);
@@ -88,8 +96,8 @@ class CmsController extends Controller
 
         // Validate data
         $request->validate([
-            'contact_heading'=> 'required',
-            'contact_sub_heading'=> 'required',
+            'contact_heading'=> 'required|max:255',
+            'contact_sub_heading'=> 'required|max:510',
             'contact_banner_img'=> 'nullable|mimes:jpeg,jpg,png|max:15000',
             'contact_content'=> 'required',
         ]);
