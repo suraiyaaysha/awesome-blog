@@ -71,6 +71,7 @@ Route::controller(CmsController::class)->group(function(){
 });
 
 // Route::get('/admin/contact/list', [ContactController::class, 'contactList'])->name('admin.contact.contactList');
+Route::delete('admin/contact/{id}/delete', [ContactController::class, 'destroy'])->name('admin.contact.destroy');
 
 Route::get('admin/general-settings', function () {
     return view('admin.general-settings');

@@ -92,6 +92,7 @@
                                         <th>User Email</th>
                                         <th>User phone</th>
                                         <th>User Message</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
 
@@ -104,6 +105,15 @@
                                             <td>{{ $item->user_email }}</td>
                                             <td>{{ $item->user_phone }}</td>
                                             <td>{{ $item->user_message }}</td>
+                                            <td>
+                                                <form action="/admin/contact/{{ $item->id }}/delete" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                    <button type="submit" class="text-decoration-none me-2 border-0 badge badge-danger"
+                                                    onclick="return confirm('Are you sure to delete this post?')"
+                                                    >Delete</button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
