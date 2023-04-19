@@ -20844,4 +20844,7 @@ div.tagsinput {
     /* border-bottom: 1px solid #000!important;
     background: var(--bs-gray-800)!important; */
 }
+.profile-img-box img {
+    max-height: 150px;
+}
 /* Custom Style */

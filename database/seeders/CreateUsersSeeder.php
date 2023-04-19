@@ -19,6 +19,8 @@ class CreateUsersSeeder extends Seeder
                 'email'=> 'admin@gmail.com',
                 'type'=> 1,
                 'password'=> bcrypt('12345678'),
+                'photo'=> 'admin/assets/images/faces/face15.jpg',
+                'address'=> 'Khulna',
             ]
         ];
 

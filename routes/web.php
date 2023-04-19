@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Frontend\FrontendBlogController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\Frontend\FrontendContactController;
+// use App\Http\Controllers\Frontend\FrontendContactController;
 use App\Http\Controllers\CmsController;
+use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -88,6 +89,9 @@ Route::middleware(['auth'])->group(function () {
 
     // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/admin/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.dashboard');
+
+    Route::get('admin/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::post('admin/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
 
 });
 

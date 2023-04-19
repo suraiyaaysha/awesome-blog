@@ -8,7 +8,7 @@
             <div class="profile-desc">
                 <div class="profile-pic">
                     <div class="count-indicator">
-                        <img class="img-xs rounded-circle " src="assets/images/faces/face15.jpg" alt="">
+                        <img class="img-xs rounded-circle " src="{{ asset(auth()->user()->photo) }}" alt="">
                         <span class="count bg-success"></span>
                     </div>
                     <div class="profile-name">
@@ -19,7 +19,7 @@
                         class="mdi mdi-dots-vertical"></i></a>
                 <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
                     aria-labelledby="profile-dropdown">
-                    {{-- <a href="#" class="dropdown-item preview-item">
+                    <a href="{{ route('profile') }}" class="dropdown-item preview-item">
                         <div class="preview-thumbnail">
                             <div class="preview-icon bg-dark rounded-circle">
                                 <i class="mdi mdi-settings text-primary"></i>
@@ -29,7 +29,7 @@
                             <p class="preview-subject ellipsis mb-1 text-small">Account settings</p>
                         </div>
                     </a>
-                    <div class="dropdown-divider"></div> --}}
+                    <div class="dropdown-divider"></div>
 
                     @if (Route::has('password.request'))
                         <a href="{{ route('password.request') }}" class="dropdown-item preview-item">

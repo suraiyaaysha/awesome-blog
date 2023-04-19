@@ -5,6 +5,10 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+use App\Models\User;
+// use App\Models\Blog;
+// use App\Models\Cms;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -18,5 +22,15 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+
+
+        $this->call([
+            CreateUsersSeeder::class,
+            CmsTableSeeder::class,
+            BlogsTableSeeder::class,
+            // add more seeder classes here
+        ]);
+
     }
 }

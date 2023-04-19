@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('password');
             $table->tinyInteger('type')->default(0);
             /* Users: 0=>User, 1->Admin */
+
+            $table->string('photo')->nullable();
+            $table->longText('address');
             $table->rememberToken();
             $table->timestamps();
         });
