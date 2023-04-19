@@ -105,14 +105,14 @@
             </a>
         </li>
 
-        <li class="nav-item menu-items">
+        {{-- <li class="nav-item menu-items">
             <a class="nav-link" href="/admin/general-settings">
                 <span class="menu-icon">
                     <i class="mdi mdi-contacts"></i>
                 </span>
                 <span class="menu-title">General Settings</span>
             </a>
-        </li>
+        </li> --}}
 
         {{--
           <li class="nav-item menu-items">
